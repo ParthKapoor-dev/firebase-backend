@@ -1,7 +1,7 @@
 import express from "express";
-import sequelize from "./src/config/database";
 import AppRouter from "./src/routes"
 import errorMiddleware from "./src/middlewares/error";
+import DatabaseConnection from "./src/config/connect";
 
 const app = express();
 const cors = require('cors');
@@ -23,20 +23,8 @@ app.use(cors({
     credentials: true
 }));
 
-// Set environmnt to development
 process.env.NODE_ENV = 'development';
-
-// Database Connection
-sequelize.authenticate().then(() => {
-    console.log('Connection has been established successfully.');
-    app.listen(process.env.PORT, async () => {
-        console.log(`Server is running on port ${process.env.PORT}`);
-    });
-}).catch((error: Error) => {
-    console.error('Unable to connect to the database:', error);
-    console.log(error.message)
-});
-
+DatabaseConnection(app);
 
 // Base Router
 app.use('/', AppRouter);

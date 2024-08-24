@@ -29,6 +29,17 @@ const User = sequelize.define('User', {
         set(val) {
             throw new Error('Cannot set full-name')
         },
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    medicalConditions: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    scmKey : {
+        type : DataTypes.STRING,
     }
 }, {
     timestamps: true,

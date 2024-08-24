@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database";
 
-const Firefighter = sequelize.define('User', {
+const Firefighter = sequelize.define('Firefighter', {
     phoneNumber: {
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -33,7 +33,7 @@ const Firefighter = sequelize.define('User', {
 }, {
     timestamps: true,
     underscored: true,
-    tableName: 'users'
+    tableName: 'firefighters'
 });
 
 export default Firefighter;
