@@ -16,17 +16,8 @@ const User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
     },
-    firstName: {
-        type: DataTypes.STRING,
-    },
     fullName: {
         type: DataTypes.STRING,
-        get() {
-            return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`
-        },
-        set(val) {
-            throw new Error('Cannot set full-name')
-        },
     },
     age: {
         type: DataTypes.INTEGER,

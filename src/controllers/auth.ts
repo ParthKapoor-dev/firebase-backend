@@ -27,16 +27,4 @@ export async function userLogin(req: Request, res: Response, next: NextFunction)
     }
 }
 
-// TODO : Update User
-
-// export async function userSignup(req: Request, res: Response, next: NextFunction) {
-
-
-//     try {
-
-//     } catch (error) {
-//         next(error);
-//     }
-// }
-
 
