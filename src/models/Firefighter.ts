@@ -21,6 +21,10 @@ const Firefighter = sequelize.define('Firefighter', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    lastName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     fullName: {
         type: DataTypes.STRING,
         get() {
@@ -29,6 +33,9 @@ const Firefighter = sequelize.define('Firefighter', {
         set(val) {
             throw new Error('Cannot set full-name')
         },
+    },
+    fcmKey: {
+        type: DataTypes.STRING,
     }
 }, {
     timestamps: true,

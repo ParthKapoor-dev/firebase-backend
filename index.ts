@@ -2,6 +2,9 @@ import express from "express";
 import AppRouter from "./src/routes"
 import errorMiddleware from "./src/middlewares/error";
 import DatabaseConnection from "./src/config/connect";
+import { testing } from "./src/controllers/test";
+import authRouter from "./src/routes/auth";
+import { verifyToken } from "./src/middlewares/verifyToken";
 
 const app = express();
 const cors = require('cors');
@@ -27,5 +30,6 @@ process.env.NODE_ENV = 'development';
 DatabaseConnection(app);
 
 // Base Router
-app.use('/', AppRouter);
+app.use('/auth', authRouter)
+app.use('/', verifyToken, AppRouter);
 app.use(errorMiddleware);

@@ -15,11 +15,9 @@ const User = sequelize.define('User', {
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
     },
     firstName: {
         type: DataTypes.STRING,
-        allowNull: false
     },
     fullName: {
         type: DataTypes.STRING,
@@ -32,14 +30,13 @@ const User = sequelize.define('User', {
     },
     age: {
         type: DataTypes.INTEGER,
-        allowNull: false
     },
     medicalConditions: {
         type: DataTypes.TEXT,
-        allowNull: false
     },
-    scmKey : {
-        type : DataTypes.STRING,
+    fcmKey : {
+        type : DataTypes.STRING, 
+        allowNull : true
     }
 }, {
     timestamps: true,
@@ -48,3 +45,4 @@ const User = sequelize.define('User', {
 });
 
 export default User;
+
