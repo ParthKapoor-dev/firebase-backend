@@ -20,3 +20,15 @@ export async function updateUser(req: Request, res: Response, next: NextFunction
         next(error);
     }
 }
+
+
+export async function userLogin(req: Request, res: Response, next: NextFunction) {
+
+    try {
+        const user = res.locals.user;
+
+        respond(res, HttpCodes.OK, "User Found", user);
+    } catch (error) {
+        next(error)
+    }
+}

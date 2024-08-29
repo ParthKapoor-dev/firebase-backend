@@ -1,30 +1,48 @@
 import { NextFunction, Request, Response } from "express";
 import { admin } from "../config/firebase";
 import { User } from "../models";
+import { HttpCodes, respond } from "../config/http";
 
 
-export async function userLogin(req: Request, res: Response, next: NextFunction) {
+export async function registerUser(req: Request, res: Response, next: NextFunction) {
 
-    const { phoneNumber } = req.body;
-    const token = req.headers['x-firebase-token'];
+    const { phoneNumber, name, city, age, gender, medicalConditions } = req.body;
+
     try {
 
-        if (!token)
-            throw new Error("Token can't be null ");
+        const user = await User.create({
+            phoneNumber, name, city, age, gender, medicalConditions
+        });
 
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        const user = await User.findByPk(decodedToken.uid);
+        if (!user)
+            throw new Error("User with this phoneNumber Already exists");
 
-        if (!user) {
-            const createdUser = User.create({ phoneNumber });
-            // respond()
-        }
-
-        res.locals.user = user;
+        respond(res, HttpCodes.OK, "User Registered Successfully", user);
 
     } catch (error) {
         next(error);
     }
 }
 
+export async function checkUserExists(req: Request, res: Response, next: NextFunction) {
 
+    const token = req.headers['x-firebase-token'];
+
+    try {
+        if (!token)
+            throw new Error("Token can't be null ");
+
+        const decodedToken = await admin.auth().verifyIdToken(token);
+        const user = await User.findByPk(decodedToken.uid);
+
+        respond(
+            res,
+            HttpCodes.OK,
+            user ? "User Exists" : "User Doesn't Exists",
+            user ? true : false
+        );
+    } catch (error) {
+        next(error);
+    }
+
+}

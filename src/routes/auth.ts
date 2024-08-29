@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { userLogin } from '../controllers/auth';
+import { checkUserExists, registerUser } from '../controllers/auth';
 const authRouter = Router();
 
-authRouter.post('/' , userLogin);
+authRouter.post('/', registerUser);
+authRouter.get('/check-user-exists', checkUserExists);
 
 export default authRouter;

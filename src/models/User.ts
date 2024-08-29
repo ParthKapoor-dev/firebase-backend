@@ -25,9 +25,13 @@ const User = sequelize.define('User', {
     medicalConditions: {
         type: DataTypes.TEXT,
     },
-    fcmKey : {
-        type : DataTypes.STRING, 
-        allowNull : true
+    gender: {
+        type: DataTypes.ENUM,
+        values: ['male', 'female']
+    },
+    fcmKey: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     timestamps: true,
