@@ -15,7 +15,7 @@ export async function updateUser(req: Request, res: Response, next: NextFunction
 
         if (!updatedUser) throw new Error("User Doesn't Exists");
 
-        respond(res, HttpCodes.OK, 'User Updated Successfully', updateUser);
+        respond(res, HttpCodes.OK, 'User Updated Successfully', updatedUser);
     } catch (error) {
         next(error);
     }
@@ -23,11 +23,8 @@ export async function updateUser(req: Request, res: Response, next: NextFunction
 
 
 export async function userLogin(req: Request, res: Response, next: NextFunction) {
-
     try {
-        const user = res.locals.user;
-
-        respond(res, HttpCodes.OK, "User Found", user);
+        respond(res, HttpCodes.OK, "User Found", res.locals.user);
     } catch (error) {
         next(error)
     }
