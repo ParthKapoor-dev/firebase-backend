@@ -14,7 +14,6 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
 
         if (!token)
             throw new Error("Token can't be null ");
-
         const id = (await admin.auth().verifyIdToken(token)).uid;
 
         const [user, created] = await User.findOrCreate({
@@ -24,10 +23,8 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
             }
         });
 
-        console.log(user , created );
-
         if (!created)
-            throw new Error("User with this phoneNumber Already exists");
+            throw new Error("User with this Id Already exists");
 
         respond(res, HttpCodes.CREATED, "User Registered Successfully", user);
 
