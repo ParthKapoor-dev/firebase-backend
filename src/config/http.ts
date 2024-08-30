@@ -23,7 +23,7 @@ export class HttpError extends Error {
 }
 
 export const getToken = (req: Request): string | undefined => {
-    return req.headers["authorization"]?.toString();
+    return req.headers["x-firebase-token"]?.toString();
 };
 
 export const respond = (res: Response, statusCode: number, message: string, data?: any)=> {

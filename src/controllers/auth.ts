@@ -41,7 +41,7 @@ export async function checkUserExists(req: Request, res: Response, next: NextFun
         respond(
             res,
             user ? HttpCodes.OK : HttpCodes.NOT_FOUND,
-            user ? "User Exists" : "User Doesn't Exists",
+            user ? "User Exist" : "User Doesn't Exist",
             user ? true : false
         );
     } catch (error) {
