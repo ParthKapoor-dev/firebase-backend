@@ -37,3 +37,20 @@ export default async function updateBuilding(req: Request, res: Response, next: 
         next(error)
     }
 }
+
+export async function getBuildingById(req: Request, res: Response, next: NextFunction) {
+
+    const id = req.params.id;
+
+    try {
+
+        const building = await Building.findByPk(id);
+        if (!building)
+            throw new Error("Invalid Building ID");
+
+        respond(res, HttpCodes.OK, 'Building Updated', building);
+
+    } catch (error) {
+        next(error)
+    }
+}
