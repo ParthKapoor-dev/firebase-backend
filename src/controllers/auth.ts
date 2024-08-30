@@ -6,10 +6,16 @@ import { getToken, HttpCodes, respond } from "../config/http";
 
 export async function registerUser(req: Request, res: Response, next: NextFunction) {
 
-    const id = res.locals.user.id;
+
+    const token = getToken(req);
     const { phoneNumber, name, city, age, gender, medicalConditions } = req.body;
 
     try {
+
+        if (!token)
+            throw new Error("Token can't be null ");
+
+        const id = (await admin.auth().verifyIdToken(token)).uid;
 
         const [user, created] = await User.findOrCreate({
             where: { id },
@@ -18,7 +24,7 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
             }
         });
 
-        if (!created)
+        if (created)
             throw new Error("User with this phoneNumber Already exists");
 
         respond(res, HttpCodes.OK, "User Registered Successfully", user);
