@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { admin } from "../config/firebase";
+import admin from "../config/firebase";
 import { User } from "../models";
+import { getToken } from "../config/http";
 
 
 export async function verifyToken(req: Request, res: Response, next: NextFunction) {
 
-    const token = req.headers['x-firebase-token'];
+    const token = getToken(req)
 
     try {
         if (!token)

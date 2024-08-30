@@ -1,9 +1,7 @@
 import express from "express";
-import AppRouter from "./src/routes"
 import errorMiddleware from "./src/middlewares/error";
 import DatabaseConnection from "./src/config/connect";
-import authRouter from "./src/routes/auth";
-import { verifyToken } from "./src/middlewares/verifyToken";
+
 
 const app = express();
 const cors = require('cors');
@@ -28,7 +26,15 @@ app.use(cors({
 process.env.NODE_ENV = 'development';
 DatabaseConnection(app);
 
-// Base Router
-app.use('/auth', authRouter)
+// Routers
+import AppRouter from "./src/routes"
+import testRouter from "./src/routes/tests"
+import syncRouter from "./src/routes/sync";
+import authRouter from "./src/routes/auth";
+import { verifyToken } from "./src/middlewares/verifyToken";
+
+app.use('/auth', authRouter);
+app.use('/sync', syncRouter);
+app.use('/test' , testRouter);
 app.use('/', verifyToken, AppRouter);
 app.use(errorMiddleware);
