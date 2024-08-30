@@ -24,6 +24,8 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
             }
         });
 
+        console.log(user , created );
+
         if (!created)
             throw new Error("User with this phoneNumber Already exists");
 

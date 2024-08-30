@@ -23,6 +23,10 @@ export async function updateUser(req: Request, res: Response, next: NextFunction
 
 
 export async function userLogin(req: Request, res: Response, next: NextFunction) {
+
+    const user = res.locals.user;
+    console.log(user)
+
     try {
         respond(res, HttpCodes.OK, "User Found", res.locals.user);
     } catch (error) {

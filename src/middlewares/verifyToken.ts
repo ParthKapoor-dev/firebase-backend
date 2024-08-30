@@ -17,6 +17,7 @@ export async function verifyToken(req: Request, res: Response, next: NextFunctio
         if (!user)
             throw new Error("Invalid User Id");
 
+        console.log('user is ' , user)
         res.locals.user = user;
         next();
 

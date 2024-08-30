@@ -35,6 +35,6 @@ import { verifyToken } from "./src/middlewares/verifyToken";
 
 app.use('/auth', authRouter);
 app.use('/sync', syncRouter);
-app.use('/test' , testRouter);
-app.use('/', AppRouter);
+app.use('/test', testRouter);
+app.use('/', verifyToken, AppRouter);
 app.use(errorMiddleware);
