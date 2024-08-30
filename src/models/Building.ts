@@ -7,9 +7,19 @@ const Building = sequelize.define('Building', {
     primaryKey : true,
     autoIncrement : true
    },
-   location : {
+   floorMap : {
+    type : DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER))),
+   },
+   eti : {
+    type : DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER))),
+   },
+   city : {
+    type : DataTypes.STRING
+   },
+   state : {
     type : DataTypes.STRING
    }
+//    city , state
 }, {
     timestamps: true,
     underscored: true,

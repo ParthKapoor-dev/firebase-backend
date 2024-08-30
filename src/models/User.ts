@@ -2,10 +2,15 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/database";
 
 const User = sequelize.define('User', {
+    id : {
+        type : DataTypes.STRING,
+        allowNull : false,
+        primaryKey : true
+    },
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true,
+        unique: true,
         validate: {
             isNumeric: {
                 msg: 'Phone number should contain only numeric values'

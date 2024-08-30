@@ -6,14 +6,15 @@ import { getToken, HttpCodes, respond } from "../config/http";
 
 export async function registerUser(req: Request, res: Response, next: NextFunction) {
 
+    const id = res.locals.user.id;
     const { phoneNumber, name, city, age, gender, medicalConditions } = req.body;
 
     try {
 
         const [user, created] = await User.findOrCreate({
-            where: { phoneNumber },
+            where: { id },
             defaults: {
-                phoneNumber, name, city, age, gender, medicalConditions
+                id, phoneNumber, name, city, age, gender, medicalConditions
             }
         });
 
