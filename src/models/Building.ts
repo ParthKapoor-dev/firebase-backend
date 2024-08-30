@@ -9,17 +9,17 @@ const Building = sequelize.define('Building', {
    },
    floorMap : {
     type : DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER))),
+    allowNull : false
    },
-   eti : {
+   tti : {
     type : DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER))),
-   },
+   },   
    city : {
     type : DataTypes.STRING
    },
    state : {
     type : DataTypes.STRING
    }
-//    city , state
 }, {
     timestamps: true,
     underscored: true,
