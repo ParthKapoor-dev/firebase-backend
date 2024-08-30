@@ -27,7 +27,7 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
         if (created)
             throw new Error("User with this phoneNumber Already exists");
 
-        respond(res, HttpCodes.OK, "User Registered Successfully", user);
+        respond(res, HttpCodes.CREATED, "User Registered Successfully", user);
 
     } catch (error) {
         next(error);
