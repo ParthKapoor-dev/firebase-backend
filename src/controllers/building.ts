@@ -4,12 +4,12 @@ import { HttpCodes, respond } from "../config/http";
 
 export async function createBuilding(req: Request, res: Response, next: NextFunction) {
 
-    const { floorMap, tti, city, state } = req.body;
+    const { floorMap, tti, fireMatrix, city, state } = req.body;
 
     try {
 
         const building = await Building.create({
-            floorMap, tti, city, state
+            floorMap, tti, fireMatrix, city, state
         });
 
         respond(res, HttpCodes.OK, 'Building Created', building);
@@ -22,12 +22,12 @@ export async function createBuilding(req: Request, res: Response, next: NextFunc
 export default async function updateBuilding(req: Request, res: Response, next: NextFunction) {
 
     const id = req.params.id;
-    const { floorMap, tti, city, state } = req.body;
+    const { floorMap, tti, fireMatrix, city, state } = req.body;
 
     try {
 
         const building = await Building.update(
-            { floorMap, tti, city, state },
+            { floorMap, tti, fireMatrix, city, state },
             { where: { id } }
         );
 

@@ -5,8 +5,11 @@ import DatabaseConnection from "./src/config/connect";
 
 const app = express();
 const cors = require('cors');
-
+const bodyParser = require('body-parser');
 require('dotenv').config();
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,13 +31,6 @@ DatabaseConnection(app);
 
 // Routers
 import AppRouter from "./src/routes"
-import testRouter from "./src/routes/tests"
-import syncRouter from "./src/routes/sync";
-import authRouter from "./src/routes/auth";
-import { verifyToken } from "./src/middlewares/verifyToken";
 
-app.use('/auth', authRouter);
-app.use('/sync', syncRouter);
-app.use('/test', testRouter);
-app.use('/', verifyToken, AppRouter);
+app.use('/', AppRouter);
 app.use(errorMiddleware);
